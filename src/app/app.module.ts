@@ -22,8 +22,11 @@ import { Camera } from '@ionic-native/camera';
 
 import { Base64 } from '@ionic-native/base64';
 
+import {ShowQuesPage} from '../pages/show-ques/show-ques';
+
+
 import { QuestionsPage } from '../pages/questions/questions';
-import {AddquestionPage} from '../pages/addquestion/addquestion'
+import {AddquestionPage} from '../pages/addquestion/addquestion';
 import { CameraProvider } from '../providers/camera/camera';
 
 
@@ -32,7 +35,8 @@ import { CameraProvider } from '../providers/camera/camera';
     MyApp,
     QuestionsPage,
     AddquestionPage,
-    LoginPage
+    LoginPage,
+    ShowQuesPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,8 @@ import { CameraProvider } from '../providers/camera/camera';
     MyApp,
     QuestionsPage,
     AddquestionPage,
-    LoginPage
+    LoginPage,
+    ShowQuesPage
   ],
   providers: [
     StatusBar,

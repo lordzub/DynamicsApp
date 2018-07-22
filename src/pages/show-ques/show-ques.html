@@ -1,0 +1,73 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>
+      Tut: {{this.data.Tutno}} |
+     Question:{{this.data.QuesNo}}
+   </ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+
+  <ion-card-content>
+    <h1>
+      Question
+    </h1>
+      </ion-card-content>
+    <img src="{{  this.data.QuesUrl}}"/>
+      <ion-card-content>
+    <h1>
+      Problem
+    </h1>
+    <h2>
+      {{this.data.Description}}
+    </h2>
+
+    <h1>
+      Working
+    </h1>
+    </ion-card-content>
+      <img src="{{  this.data.WorkDataUrl1}}"/>
+      <img src="{{  this.data.WorkDataUrl2}}"/>
+      <img src="{{  this.data.WorkDataUrl3}}"/>
+      <img src="{{  this.data.WorkDataUrl4}}"/>
+      <img src="{{  this.data.WorkDataUrl5}}"/>
+
+  </ion-card>
+
+
+  <h1>
+    Answer
+  </h1>
+  <p>
+    {{Ans}}
+  </p>
+
+
+
+
+
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+
+    <ion-item>
+      <textarea #myInput id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="myStuff"></textarea>
+      <ion-icon item-end name="paper-plane" (click)="SendAns()"></ion-icon>
+    </ion-item>
+
+
+
+
+  </ion-toolbar>
+</ion-footer>

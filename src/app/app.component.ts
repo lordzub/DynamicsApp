@@ -10,6 +10,7 @@ import { AngularFireModule } from 'angularfire2';
 import { config } from './app.firebaseconfig';
 import firebase from 'firebase/app';
 
+
 @Component({
   templateUrl: 'app.html'
 })

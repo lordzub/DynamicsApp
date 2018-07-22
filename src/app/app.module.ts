@@ -13,7 +13,7 @@ import { MyApp } from './app.component';
 import { AuthProvider } from '../providers/auth/auth';
 import { UserProvider } from '../providers/user/user';
 import { ImghandlerProvider } from '../providers/imghandler/imghandler';
-
+import { LoginPage } from '../pages/login/login';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FilePath } from '@ionic-native/file-path';
@@ -31,7 +31,8 @@ import { CameraProvider } from '../providers/camera/camera';
   declarations: [
     MyApp,
     QuestionsPage,
-    AddquestionPage
+    AddquestionPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +43,8 @@ import { CameraProvider } from '../providers/camera/camera';
   entryComponents: [
     MyApp,
     QuestionsPage,
-    AddquestionPage
+    AddquestionPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

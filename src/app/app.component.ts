@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { QuestionsPage } from '../pages/questions/questions';
+import { LoginPage } from '../pages/login/login';
 import { AngularFireModule } from 'angularfire2';
 import { config } from './app.firebaseconfig';
 import firebase from 'firebase/app';
@@ -21,7 +22,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-    
+
     });
 
     firebase.initializeApp(config);

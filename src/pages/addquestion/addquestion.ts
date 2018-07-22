@@ -37,13 +37,20 @@ export class AddquestionPage {
 
   firedata = firebase.database().ref('/Questions');
   firestore = firebase.storage();
+
 public captureWorkingDataUrl: string;
 
 
 
   constructor(public actionSheetCtrl: ActionSheetController, private camera:Camera,public imgservice: ImghandlerProvider,
-     public loadingCtrl: LoadingController,public zone: NgZone, public filechooser: FileChooser) {
+     public loadingCtrl: LoadingController,public zone: NgZone, public filechooser: FileChooser,public navCtrl: NavController) {
        var QuesUrl;
+       this.WorkDataUrl = " ";
+           this.WorkDataUrl1  =" ";
+            this.WorkDataUrl2  =" ";
+            this.WorkDataUrl3  =" ";
+            this.WorkDataUrl4  =" ";
+           this.WorkDataUrl5 =" ";
   }
 
   ionViewDidLoad() {
@@ -61,6 +68,15 @@ public captureWorkingDataUrl: string;
   public  x =0;
   public y =0;
   public AA: string;
+
+  public  WorkDataUrl: string;
+  public  WorkDataUrl1: string;
+  public  WorkDataUrl2: string;
+  public  WorkDataUrl3: string;
+  public  WorkDataUrl4: string;
+  public  WorkDataUrl5: string;
+
+
   public  captureWorkDataUrl: string;
   public  captureWorkDataUrl1: string;
   public  captureWorkDataUrl2: string;
@@ -82,9 +98,9 @@ public captureWorkingDataUrl: string;
       let loader = this.loadingCtrl.create({
         content: 'Please wait'
       })
-      loader.present();
+    //  loader.present();
       this.imgservice.uploadimage().then((uploadedurl: any) => {
-        loader.dismiss();
+    //    loader.dismiss();
         this.zone.run(() => {
 
           if (this.i ==1)
@@ -133,12 +149,12 @@ console.log(this.x);
            this.loading = this.loadingCtrl.create({
              content: 'Please wait...'
            });
-           this.loading.present();
+        this.loading.present();
 
            this.selectedPhoto  = this.dataURItoBlob('data:image/jpeg;base64,' + imageData);
            if (this.x==0)
            {
-          // this.captureQuestionDataUrl = 'data:image/jpeg;base64,' + imageData;
+           this.captureQuestionDataUrl = 'data:image/jpeg;base64,' + imageData;
            }
 
 
@@ -198,6 +214,7 @@ console.log(this.x);
 
 
     upload() {
+
       if (this.x==0)
       {
        if (this.selectedPhoto) {
@@ -206,19 +223,14 @@ console.log(this.x);
 
            firebase.storage().ref().child('images/'+this.TutNo+'/'+this.QuesNo+'/question.png').getDownloadURL().then((url) => {
              this.AA = url.toString();
-             console.log('AA--'+this.AA );
-                console.log('url--'+url );
 
+            this.loading.dismiss();
            }).catch((err) => {
               console.log(err);
            });
           // console.log(QuesUrl1.toString());
           // this.AA = firebase.storage().ref().child('images/'+this.TutNo+'/'+this.QuesNo+'/question.png').getDownloadURL().toString();
-          firebase.database().ref('Stuff/').set({
-           Tutno: this.TutNo,
-           QuesNo: this.QuesNo,
-           QuesUrl : this.AA
-          });
+
 
     },
     (err) => {
@@ -230,9 +242,48 @@ console.log(this.x);
        }
        if (this.x==1)
        {
+
          var uploadTask = firebase.storage().ref().child('images/'+this.TutNo+'/'+this.QuesNo+'/working'+this.i+'.png').put(this.selectedPhoto);
-         uploadTask.then(this.onSuccess, this.onError);
+         uploadTask.then((result) => {
+
+           firebase.storage().ref().child('images/'+this.TutNo+'/'+this.QuesNo+'/working'+this.i+'.png').getDownloadURL().then((url) => {
+            if (this.i ==1)
+            {
+            this.WorkDataUrl1 = url.toString();
+            }
+            if (this.i ==2)
+            {
+            this.WorkDataUrl2 = url.toString();
+            }
+            if (this.i ==3)
+            {
+            this.WorkDataUrl3 = url.toString();
+            }
+            if (this.i ==4)
+            {
+            this.WorkDataUrl4 = url.toString();
+            }
+            if (this.i ==5)
+            {
+            this.WorkDataUrl5 = url.toString();
+            }
+         this.loading.dismiss();
+           }).catch((err) => {
+              console.log(err);
+           });
+           //this.loading.dismiss();
+          // console.log(QuesUrl1.toString());
+          // this.AA = firebase.storage().ref().child('images/'+this.TutNo+'/'+this.QuesNo+'/question.png').getDownloadURL().toString();
+
+
+    },
+    (err) => {
+        // something didn't work
+       console.log(err);
+    });
+
        }
+
      }
 
 
@@ -242,16 +293,32 @@ console.log(this.x);
 
      onSuccess = snapshot => {
        console.log('sucess');
-
+       this.loading.dismiss();
     };
 
     onError = error => {
       console.log("error", error);
-      this.loading.dismiss();
+      //this.loading.dismiss();
     };
 
 
+postQuestion()
+{
 
+  firebase.database().ref('Questions/Tutorial:'+this.TutNo+"/Question No: "+this.QuesNo+"/").set({
+   Tutno: this.TutNo,
+   QuesNo: this.QuesNo,
+   Description:this.Description,
+   QuesUrl : this.AA,
+   WorkDataUrl1: this.WorkDataUrl1,
+   WorkDataUrl2: this.WorkDataUrl2,
+   WorkDataUrl3: this.WorkDataUrl3,
+   WorkDataUrl4: this.WorkDataUrl4,
+   WorkDataUrl5: this.WorkDataUrl5
+  });
+
+this.navCtrl.pop();
+}
 
 
 
@@ -260,9 +327,9 @@ console.log(this.x);
       let loader = this.loadingCtrl.create({
         content: 'Please wait'
       })
-      loader.present();
+  //    loader.present();
       this.imgservice.uploadimage().then((uploadedurl: any) => {
-        loader.dismiss();
+    //    loader.dismiss();
         this.zone.run(() => {
       this.captureQuestionDataUrl = uploadedurl;
 

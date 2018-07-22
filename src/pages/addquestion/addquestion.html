@@ -58,9 +58,6 @@
 </div>
 <div style="display:flex; flex-direction:column;justify-content:center">
      <img [src]="captureWorkDataUrl5" *ngIf="captureWorkDataUrl5"/>
-     <ion-label>{{TutNo}}</ion-label>
-     <ion-label>{{Description}}</ion-label>
-     <ion-label>{{QuesUrl}}</ion-label>
 </div>
 
 
@@ -69,9 +66,8 @@
 <div style="display:flex; flex-direction:column;justify-content:center">
   <button ion-button (click)="presentWorkingActionSheet()" block>Add Working Photo</button>
 
-  <button ion-button block>Post Question</button>
+  <button ion-button block  (click)="postQuestion()">Post Question</button>
 </div>
 
 
-<ion-label>{{AA}}</ion-label>
 </ion-content>

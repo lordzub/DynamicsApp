@@ -16,7 +16,7 @@ import firebase from 'firebase';
 })
 export class ProfilePage {
   avatar: string;
-  displayName: string;
+  StudentNumber: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public userservice: UserProvider, public zone: NgZone, public alertCtrl: AlertController,
     public imghandler: ImghandlerProvider) {
@@ -28,13 +28,13 @@ export class ProfilePage {
 
   loaduserdetails() {
     this.userservice.getuserdetails().then((res: any) => {
-      this.displayName = res.displayName;
+      this.StudentNumber = res.StudentNumber;
       this.zone.run(() => {
         this.avatar = res.photoURL;
       })
     })
   }
-
+/*
   editimage() {
     let statusalert = this.alertCtrl.create({
       buttons: ['okay']
@@ -78,13 +78,13 @@ export class ProfilePage {
         text: 'Edit',
         handler: data => {
           if (data.nickname) {
-            this.userservice.updatedisplayname(data.nickname).then((res: any) => {
+            this.userservice.updateStudentNumber(data.nickname).then((res: any) => {
               if (res.success) {
                 statusalert.setTitle('Updated');
                 statusalert.setSubTitle('Your nickname has been changed successfully!!');
                 statusalert.present();
                 this.zone.run(() => {
-                  this.displayName = data.nickname;
+                  this.StudentNumber = data.nickname;
                 })
               }
 
@@ -102,6 +102,7 @@ export class ProfilePage {
     });
     alert.present();
   }
+  */
 
   logout() {
     firebase.auth().signOut().then(() => {

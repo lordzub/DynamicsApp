@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import {QuestionsPage} from '../questions/questions';
+import {LoginPage} from '../login/login';
 /**
  * Generated class for the SignupPage page.
  *
@@ -16,7 +18,7 @@ export class SignupPage {
   newuser = {
     email: '',
     password: '',
-    displayName: ''
+    StudentNumber: ''
   }
   constructor(public navCtrl: NavController, public navParams: NavParams, public userservice: UserProvider,
               public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
@@ -27,7 +29,7 @@ export class SignupPage {
       duration: 3000,
       position: 'bottom'
     });
-    if (this.newuser.email == '' || this.newuser.password == '' || this.newuser.displayName == '') {
+    if (this.newuser.email == '' || this.newuser.password == '' || this.newuser.StudentNumber == '') {
       toaster.setMessage('All fields are required dude');
       toaster.present();
     }
@@ -43,7 +45,7 @@ export class SignupPage {
       this.userservice.adduser(this.newuser).then((res: any) => {
         loader.dismiss();
         if (res.success)
-          this.navCtrl.push('ProfilepicPage');
+          this.navCtrl.setRoot(QuestionsPage);
         else
           alert('Error' + res);
       })
@@ -51,7 +53,7 @@ export class SignupPage {
   }
 
   goback() {
-    this.navCtrl.setRoot('LoginPage');
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

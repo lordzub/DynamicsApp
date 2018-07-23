@@ -27,6 +27,10 @@ import {ShowQuesPage} from '../pages/show-ques/show-ques';
 
 import { QuestionsPage } from '../pages/questions/questions';
 import {AddquestionPage} from '../pages/addquestion/addquestion';
+import { SignupPage } from '../pages/signup/signup';
+
+
+
 import { CameraProvider } from '../providers/camera/camera';
 
 
@@ -36,7 +40,8 @@ import { CameraProvider } from '../providers/camera/camera';
     QuestionsPage,
     AddquestionPage,
     LoginPage,
-    ShowQuesPage
+    ShowQuesPage,
+    SignupPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { CameraProvider } from '../providers/camera/camera';
     QuestionsPage,
     AddquestionPage,
     LoginPage,
-    ShowQuesPage
+    ShowQuesPage,
+    SignupPage
   ],
   providers: [
     StatusBar,

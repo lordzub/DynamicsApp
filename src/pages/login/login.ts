@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { usercreds } from '../../models/interfaces/usercreds';
-
+import {SignupPage} from '../signup/signup';
+import {QuestionsPage} from '../questions/questions';
+import {PasswordresetPage} from '../passwordreset/passwordreset';
 import { AuthProvider } from '../../providers/auth/auth';
 
 /**
@@ -28,14 +30,19 @@ export class LoginPage {
   signin() {
     this.authservice.login(this.credentials).then((res: any) => {
       if (!res.code)
-        this.navCtrl.setRoot('TabsPage');
+      {
+        this.navCtrl.setRoot(QuestionsPage);
+      }
       else
+      {
+
         alert(res);
+      }
     })
   }
 
   signup() {
-    this.navCtrl.push('SignupPage');
+    this.navCtrl.push(SignupPage);
   }
   passwordreset() {
     this.navCtrl.push('PasswordresetPage');

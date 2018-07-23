@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { QuestionsPage } from '../pages/questions/questions';
 import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
+
 import { AngularFireModule } from 'angularfire2';
 import { config } from './app.firebaseconfig';
 import firebase from 'firebase/app';
@@ -15,7 +17,7 @@ import firebase from 'firebase/app';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = QuestionsPage;
+  rootPage:any = LoginPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {

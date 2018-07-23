@@ -13,44 +13,56 @@
 
 
 <ion-content padding>
+
   <ion-card>
 
-  <ion-card-content>
-    <h1>
-      Question
-    </h1>
-      </ion-card-content>
-    <img src="{{  this.data.QuesUrl}}"/>
-      <ion-card-content>
-    <h1>
-      Problem
-    </h1>
-    <h2>
-      {{this.data.Description}}
-    </h2>
+    <ion-item>
+      <h2>
+        Question: {{this.data.QuesNo}}
+      </h2>
+      <h2>
+        Tutorial: {{this.data.Tutno}}
+      </h2>
+    </ion-item>
 
-    <h1>
-      Working
-    </h1>
+      <img src="{{  this.data.QuesUrl}}"/>
+
+    <ion-card-content>
+      <h2>Problem</h2>
+      <p>{{this.data.Description}}</p>
+      <h2>
+        Working
+      </h2>
+
+
+
     </ion-card-content>
-      <img src="{{  this.data.WorkDataUrl1}}"/>
-      <img src="{{  this.data.WorkDataUrl2}}"/>
-      <img src="{{  this.data.WorkDataUrl3}}"/>
-      <img src="{{  this.data.WorkDataUrl4}}"/>
-      <img src="{{  this.data.WorkDataUrl5}}"/>
-
+    <img src="{{  this.data.WorkDataUrl1}}"/>
+    <img src="{{  this.data.WorkDataUrl2}}"/>
+    <img src="{{  this.data.WorkDataUrl3}}"/>
+    <img src="{{  this.data.WorkDataUrl4}}"/>
+    <img src="{{  this.data.WorkDataUrl5}}"/>
   </ion-card>
 
 
-  <h1>
-    Answer
-  </h1>
-  <p>
-    {{Ans}}
-  </p>
+
+  <ion-card *ngFor = 'let Ans of Data '>
 
 
+  <ion-card-content>
+  <ion-note>
+    Answered by: {{Ans.StudentNumber}}
+  </ion-note>
 
+  <h2>
+    {{Ans.Ans}}
+  </h2>
+</ion-card-content>
+  <button ion-button *ngIf ='Ans.StudentNumber == this.StudentNumber' color="danger" (click)="deleteQuestion()" >
+  <ion-icon name="backspace" icon-end>  Delete</ion-icon>
+ </button>
+
+</ion-card>
 
 
 

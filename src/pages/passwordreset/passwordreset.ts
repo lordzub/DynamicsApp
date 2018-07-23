@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
-/**
+import {LoginPage} from '../login/login';
+/**import {LoginPage} from '../login/login';
  * Generated class for the PasswordresetPage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
@@ -38,7 +39,7 @@ export class PasswordresetPage {
   }
 
   goback() {
-    this.navCtrl.setRoot('LoginPage');
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }

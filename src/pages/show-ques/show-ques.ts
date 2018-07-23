@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import firebase from 'firebase';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the ShowQuesPage page.
@@ -17,11 +18,14 @@ import firebase from 'firebase';
 })
 export class ShowQuesPage {
   @ViewChild('myInput') myInput: ElementRef;
+public Data: Array<any> = [];
 public data:any;
 public myStuff:string;
 public Ans:any;
+public AnsStudent:any;
+ StudentNumber:String;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userservice: UserProvider)
   {
 this.data = navParams.get('question');
 console.log(this.data);
@@ -32,19 +36,36 @@ console.log(this.data);
     console.log('ionViewDidLoad ShowQuesPage');
 
 
-    var QuestionRef = firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+'/Question No: '+this.data.QuesNo);
-    QuestionRef.on('value', Snapshot =>
-  {
+var itemRef = firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+'/');
+    itemRef.on('value', itemSnapshot => {
+      this.Data = [];
 
-   Snapshot.forEach( Snap => {
-  console.log(Snap.val());
-   this.Ans = Snap.val();
-   
+      itemSnapshot.forEach( itemSnap => {
+        var key = itemSnap.key;
+      //  this.TutNo.push(itemSnap.key);
+
+        var QuestionRef = firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+'/Question No: '+this.data.QuesNo);
+        QuestionRef.on('value', Snapshot =>
+      {
+
+       Snapshot.forEach( Snap => {
+         var key1 = Snap.key;
+         //this.QuesNo.push(key1);
+         console.log(key1);
+
+         this.Data.push(Snap.val());
+        console.log(this.Data);
+      });
+      });
+        return false;
 
 
-  //   console.log(this.TutNo);
-  });
-  });
+
+      });
+
+
+
+    });
 
 
 
@@ -53,6 +74,21 @@ console.log(this.data);
 
 
 
+
+
+
+
+//console.log(this.Data.StudentNumber);
+
+this.loaduserdetails();
+  }
+
+
+  loaduserdetails() {
+    this.userservice.getuserdetails().then((res: any) => {
+      this.StudentNumber = res.StudentNumber;
+        console.log(this.StudentNumber);
+    })
   }
 
 
@@ -63,14 +99,19 @@ console.log(this.data);
 
 
 
+  deleteQuestion()
+  {
+    firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+'/Question No: '+this.data.QuesNo+'/'+this.StudentNumber).remove();
+  }
 
 
 
 SendAns()
 {
 
-  firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+"/Question No: "+this.data.QuesNo+"/").set({
-   Ans: this.myStuff
+  firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+"/Question No: "+this.data.QuesNo+"/"+this.StudentNumber).set({
+   Ans: this.myStuff,
+   StudentNumber: this.StudentNumber
   });
   this.myStuff ='';
 

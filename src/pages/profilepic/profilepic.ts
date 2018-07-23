@@ -38,19 +38,7 @@ export class ProfilepicPage {
   }
 
   updateproceed() {
-    let loader = this.loadingCtrl.create({
-      content: 'Please wait'
-    })
-    loader.present();
-    this.userservice.updateimage(this.imgurl).then((res: any) => {
-      loader.dismiss();
-      if (res.success) {
-        this.navCtrl.setRoot('TabsPage');
-      }
-      else {
-        alert(res);
-      }
-    })
+  
   }
 
   proceed() {

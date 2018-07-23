@@ -28,12 +28,12 @@ export class UserProvider {
     var promise = new Promise((resolve, reject) => {
       this.afireauth.auth.createUserWithEmailAndPassword(newuser.email, newuser.password).then(() => {
         this.afireauth.auth.currentUser.updateProfile({
-          displayName: newuser.displayName,
+        displayName: newuser.displayName,
           photoURL: 'https://firebasestorage.googleapis.com/v0/b/myapp-4eadd.appspot.com/o/chatterplace.png?alt=media&token=e51fa887-bfc6-48ff-87c6-e2c61976534e'
         }).then(() => {
           this.firedata.child(this.afireauth.auth.currentUser.uid).set({
             uid: this.afireauth.auth.currentUser.uid,
-            displayName: newuser.displayName,
+            StudentNumber: newuser.StudentNumber,
             photoURL: 'https://firebasestorage.googleapis.com/v0/b/myapp-4eadd.appspot.com/o/chatterplace.png?alt=media&token=e51fa887-bfc6-48ff-87c6-e2c61976534e'
           }).then(() => {
             resolve({ success: true });
@@ -80,15 +80,15 @@ export class UserProvider {
   OUtputs - Promise.
 
   */
-
+/*
   updateimage(imageurl) {
       var promise = new Promise((resolve, reject) => {
           this.afireauth.auth.currentUser.updateProfile({
-              displayName: this.afireauth.auth.currentUser.displayName,
+              StudentNumber: this.afireauth.auth.currentUser.StudentNumber,
               photoURL: imageurl
           }).then(() => {
               firebase.database().ref('/users/' + firebase.auth().currentUser.uid).update({
-              displayName: this.afireauth.auth.currentUser.displayName,
+              StudentNumber: this.afireauth.auth.currentUser.StudentNumber,
               photoURL: imageurl,
               uid: firebase.auth().currentUser.uid
               }).then(() => {
@@ -102,7 +102,7 @@ export class UserProvider {
       })
       return promise;
   }
-
+*/
   getuserdetails() {
     var promise = new Promise((resolve, reject) => {
     this.firedata.child(firebase.auth().currentUser.uid).once('value', (snapshot) => {
@@ -113,7 +113,7 @@ export class UserProvider {
     })
     return promise;
   }
-
+/*
   updatedisplayname(newname) {
     var promise = new Promise((resolve, reject) => {
       this.afireauth.auth.currentUser.updateProfile({
@@ -135,5 +135,5 @@ export class UserProvider {
     })
     return promise;
   }
-
+*/
 }

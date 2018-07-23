@@ -8,6 +8,7 @@ import {storage} from 'firebase';
 import firebase from 'firebase';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
+import { UserProvider } from '../../providers/user/user';
 
 
 /**
@@ -23,6 +24,7 @@ import { FileChooser } from '@ionic-native/file-chooser';
   templateUrl: 'addquestion.html',
 })
 export class AddquestionPage {
+    StudentNumber: string;
   someTextUrl;
   selectedPhoto;
     selectedPhoto1;
@@ -38,12 +40,12 @@ export class AddquestionPage {
   firedata = firebase.database().ref('/Questions');
   firestore = firebase.storage();
 
-public captureWorkingDataUrl: string;
+public WorkingDataUrl: string;
 
 
 
   constructor(public actionSheetCtrl: ActionSheetController, private camera:Camera,public imgservice: ImghandlerProvider,
-     public loadingCtrl: LoadingController,public zone: NgZone, public filechooser: FileChooser,public navCtrl: NavController) {
+     public loadingCtrl: LoadingController,public zone: NgZone, public filechooser: FileChooser,public navCtrl: NavController,   public userservice: UserProvider) {
        var QuesUrl;
        this.WorkDataUrl = " ";
            this.WorkDataUrl1  =" ";
@@ -55,11 +57,18 @@ public captureWorkingDataUrl: string;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddquestionPage');
+    this.loaduserdetails();
+
   }
 
+  loaduserdetails() {
+    this.userservice.getuserdetails().then((res: any) => {
+      this.StudentNumber = res.StudentNumber;
+        console.log(this.StudentNumber);
+    })
+  }
 
-
-  public captureQuestionDataUrl: string;
+  public QuestionDataUrl: string;
 
 
 
@@ -76,13 +85,6 @@ public captureWorkingDataUrl: string;
   public  WorkDataUrl4: string;
   public  WorkDataUrl5: string;
 
-
-  public  captureWorkDataUrl: string;
-  public  captureWorkDataUrl1: string;
-  public  captureWorkDataUrl2: string;
-  public  captureWorkDataUrl3: string;
-  public  captureWorkDataUrl4: string;
-  public  captureWorkDataUrl5: string;
 
 
   captureWorking() {
@@ -105,23 +107,23 @@ public captureWorkingDataUrl: string;
 
           if (this.i ==1)
           {
-            this.captureWorkDataUrl1 = uploadedurl;
+            this.WorkDataUrl1 = uploadedurl;
           }
            if ( this.i ==2)
             {
-            this.captureWorkDataUrl2 = uploadedurl;
+            this.WorkDataUrl2 = uploadedurl;
             }
            if ( this.i ==3)
               {
-                this.captureWorkDataUrl3 = uploadedurl;
+                this.WorkDataUrl3 = uploadedurl;
               }
             if ( this.i ==4)
                 {
-                  this.captureWorkDataUrl4 = uploadedurl;
+                  this.WorkDataUrl4 = uploadedurl;
                 }
              if ( this.i ==5)
                   {
-                    this.captureWorkDataUrl5 = uploadedurl;
+                    this.WorkDataUrl5 = uploadedurl;
                   }
 
 
@@ -154,7 +156,7 @@ console.log(this.x);
            this.selectedPhoto  = this.dataURItoBlob('data:image/jpeg;base64,' + imageData);
            if (this.x==0)
            {
-           this.captureQuestionDataUrl = 'data:image/jpeg;base64,' + imageData;
+           this.QuestionDataUrl = 'data:image/jpeg;base64,' + imageData;
            }
 
 
@@ -163,26 +165,26 @@ console.log(this.x);
              if (this.i ==1)
              {
 
-               this.captureWorkDataUrl1 = 'data:image/jpeg;base64,' + imageData;
+               this.WorkDataUrl1 = 'data:image/jpeg;base64,' + imageData;
 
                    }
               if ( this.i ==2)
                {
 
-               this.captureWorkDataUrl2 = 'data:image/jpeg;base64,' + imageData;
+               this.WorkDataUrl2 = 'data:image/jpeg;base64,' + imageData;
 
                }
               if ( this.i ==3)
                  {
-                   this.captureWorkDataUrl3 = 'data:image/jpeg;base64,' + imageData;
+                   this.WorkDataUrl3 = 'data:image/jpeg;base64,' + imageData;
                  }
                if ( this.i ==4)
                    {
-                     this.captureWorkDataUrl4 = 'data:image/jpeg;base64,' + imageData;
+                     this.WorkDataUrl4 = 'data:image/jpeg;base64,' + imageData;
                    }
                 if ( this.i ==5)
                      {
-                       this.captureWorkDataUrl5 = 'data:image/jpeg;base64,' + imageData;
+                       this.WorkDataUrl5 = 'data:image/jpeg;base64,' + imageData;
                      }
            }
 
@@ -314,7 +316,8 @@ postQuestion()
    WorkDataUrl2: this.WorkDataUrl2,
    WorkDataUrl3: this.WorkDataUrl3,
    WorkDataUrl4: this.WorkDataUrl4,
-   WorkDataUrl5: this.WorkDataUrl5
+   WorkDataUrl5: this.WorkDataUrl5,
+   PostedBy: this.StudentNumber
   });
 
 this.navCtrl.pop();
@@ -331,8 +334,8 @@ this.navCtrl.pop();
       this.imgservice.uploadimage().then((uploadedurl: any) => {
     //    loader.dismiss();
         this.zone.run(() => {
-      this.captureQuestionDataUrl = uploadedurl;
-
+      this.QuestionDataUrl = uploadedurl;
+      this.AA = uploadedurl;
 
         })
       })

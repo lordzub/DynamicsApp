@@ -4,7 +4,7 @@ import {AddquestionPage} from '../addquestion/addquestion';
 import {ShowQuesPage} from '../show-ques/show-ques';
 
 import firebase from 'firebase';
-
+import { UserProvider } from '../../providers/user/user';
 /**
  * Generated class for the QuestionsPage page.
  *
@@ -18,13 +18,14 @@ import firebase from 'firebase';
   templateUrl: 'questions.html',
 })
 export class QuestionsPage {
-
+StudentNumber:string;
 public Data: Array<any> = [];
 public QuesNo: Array<any> = [];
+
 public itemRef: firebase.database.Reference = firebase.database().ref('/Questions');
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userservice: UserProvider) {
 
   //  this.readData();
 
@@ -60,8 +61,16 @@ public itemRef: firebase.database.Reference = firebase.database().ref('/Question
 
 
   });
+  this.loaduserdetails();
 }
 
+
+loaduserdetails() {
+  this.userservice.getuserdetails().then((res: any) => {
+    this.StudentNumber = res.StudentNumber;
+      console.log(this.StudentNumber);
+  })
+}
   ionViewWillEnter()
   {
 
@@ -79,5 +88,12 @@ showQuestion(index: number)
   this.navCtrl.push(ShowQuesPage, {
     question: this.Data[index]
 });
+}
+
+
+deleteQuestion(i)
+{
+  firebase.database().ref('Questions/Tutorial:'+this.Data[i].Tutno+'/Question No: '+this.Data[i].QuesNo).remove();
+  console.log("Deleted")
 }
 }

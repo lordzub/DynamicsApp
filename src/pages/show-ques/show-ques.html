@@ -3,8 +3,8 @@
 
   <ion-navbar>
     <ion-title>
-      Tut: {{this.data.Tutno}} |
-     Question:{{this.data.QuesNo}}
+      Tut: {{this.question.Tutno}} |
+     Question:{{this.question.QuesNo}}
    </ion-title>
 
   </ion-navbar>
@@ -16,32 +16,18 @@
 
   <ion-card>
 
-    <ion-item>
-      <h2>
-        Question: {{this.data.QuesNo}}
-      </h2>
-      <h2>
-        Tutorial: {{this.data.Tutno}}
-      </h2>
-    </ion-item>
-
-      <img src="{{  this.data.QuesUrl}}"/>
-
     <ion-card-content>
-      <h2>Problem</h2>
-      <p>{{this.data.Description}}</p>
-      <h2>
-        Working
-      </h2>
+      <h1>Question Picture:</h1>
 
+<img style="width:45%; display: inline-block" src="{{  this.question.QuesUrl}}"/>
 
+<img style="width:45%; display: inline-block;" src="{{  this.question.WorkDataUrl1}}"/>
+
+<div class="spacer" style="width:300px;height:32px;" id="home-spacer2"></div>
 
     </ion-card-content>
-    <img src="{{  this.data.WorkDataUrl1}}"/>
-    <img src="{{  this.data.WorkDataUrl2}}"/>
-    <img src="{{  this.data.WorkDataUrl3}}"/>
-    <img src="{{  this.data.WorkDataUrl4}}"/>
-    <img src="{{  this.data.WorkDataUrl5}}"/>
+
+    <h1>My issue: {{this.question.Description}}</h1>
   </ion-card>
 
 
@@ -50,7 +36,7 @@
 
 
   <ion-card-content>
-  <ion-note>
+  <ion-note>question
     Answered by: {{Ans.StudentNumber}}
   </ion-note>
 

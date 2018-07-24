@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title start>Questions</ion-title>
+    <ion-title start>All Queries</ion-title>
 
 <ion-buttons end >
   <button ion-button (click)="openAdQuestionsPage()" large>
@@ -16,39 +16,48 @@
 </ion-buttons>
   </ion-navbar>
 
-</ion-header>
+<form id="home-form6">
+  <ion-item id="home-input8">
+    <ion-label>
+    </ion-label>
+    <ion-input type="text" placeholder="Help us help you: add feedback!"></ion-input>
+  </ion-item>
+</form>
 
+</ion-header>
 
 <ion-content padding>
 
+
+  <h1 id="home-heading1" style="color:#000000;">
+    Unresolved Issues
+  </h1>
+
   <ion-card *ngFor="let item of Data; let i = index" [attr.data-index]="i">
+<div class="spacer" style="width:300px;height:24px;" id="home-spacer2"></div>
+
       <button ion-button *ngIf ='item.PostedBy == this.StudentNumber' color="danger" (click)="deleteQuestion(i)" >
       <ion-icon name="backspace" icon-end>  Delete</ion-icon>
      </button>
+
 <ion-card (click)="showQuestion(i)">
 
       <ion-item>
-      <h2>Tutorial: {{item.Tutno}}</h2>
-      <p>Question Number: {{item.QuesNo}}</p>
-    </ion-item>
+      <div><ion-icon name="paw" > Tutorial: {{item.Tutno}} </ion-icon></div>
+      <ion-icon name="finger-print" > Question: {{item.QuesNo}} </ion-icon>
 
+
+    <ion-thumbnail item-left>
     <img src="{{item.QuesUrl}}">
+    </ion-thumbnail>
+</ion-item>
 
-    <ion-card-content>
-      <h2>Problem:</h2>
-      <p>{{item.Description}}</p>
-      <ion-note> Posted by : {{item.PostedBy}}</ion-note>
-    </ion-card-content>
+    <ion-item>
+      <h2><em>{{item.Description}}</em></h2>
+      <div> <ion-note item-right> Posted by : {{item.PostedBy}}</ion-note> </div>
+
+
+    </ion-item>
 
   </ion-card>
  </ion-card>
-
-
-
-
-
-
-
-
-
-</ion-content>

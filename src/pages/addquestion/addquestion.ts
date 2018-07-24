@@ -34,6 +34,7 @@ export class AddquestionPage {
 
   TutNo: number;
   QuesNo: number;
+  recommendation_adding: string;
   Description: String;
 
 
@@ -304,6 +305,7 @@ console.log(this.x);
     };
 
 
+
 postQuestion()
 {
 
@@ -322,6 +324,7 @@ postQuestion()
 
 this.navCtrl.pop();
 }
+
 
 
 
@@ -397,6 +400,15 @@ this.navCtrl.pop();
             ]
           });
           actionSheet.present();
+        }
+
+        sendFeedback(){
+          firebase.database().ref('recommendation_adding').push({
+
+           Ans: this.recommendation_adding,
+           StudentNumber: this.StudentNumber
+          });
+          this.recommendation_adding ='';
         }
 
 }

@@ -19,6 +19,7 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class QuestionsPage {
 StudentNumber:string;
+recommendation_home: string;
 public Data: Array<any> = [];
 public QuesNo: Array<any> = [];
 
@@ -89,7 +90,14 @@ showQuestion(index: number)
     question: this.Data[index]
 });
 }
+sendFeedback(){
+  firebase.database().ref('recommendation_home').push({
 
+   Ans: this.recommendation_home,
+   StudentNumber: this.StudentNumber
+  });
+  this.recommendation_home ='';
+}
 
 deleteQuestion(i)
 {

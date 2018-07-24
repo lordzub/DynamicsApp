@@ -19,7 +19,7 @@ import { UserProvider } from '../../providers/user/user';
 export class ShowQuesPage {
   @ViewChild('myInput') myInput: ElementRef;
 public Data: Array<any> = [];
-public data:any;
+public question:any;
 public myStuff:string;
 public Ans:any;
 public AnsStudent:any;
@@ -27,8 +27,8 @@ public AnsStudent:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userservice: UserProvider)
   {
-this.data = navParams.get('question');
-console.log(this.data);
+this.question = navParams.get('question');
+console.log(this.question);
 
   }
 
@@ -36,15 +36,15 @@ console.log(this.data);
     console.log('ionViewDidLoad ShowQuesPage');
 
 
-var itemRef = firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+'/');
+var itemRef = firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/');
     itemRef.on('value', itemSnapshot => {
       this.Data = [];
 
       itemSnapshot.forEach( itemSnap => {
-        var key = itemSnap.key;
+      //  var key = itemSnap.key;
       //  this.TutNo.push(itemSnap.key);
 
-        var QuestionRef = firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+'/Question No: '+this.data.QuesNo);
+        var QuestionRef = firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/Question No: '+this.question.QuesNo);
         QuestionRef.on('value', Snapshot =>
       {
 
@@ -101,7 +101,7 @@ this.loaduserdetails();
 
   deleteQuestion()
   {
-    firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+'/Question No: '+this.data.QuesNo+'/'+this.StudentNumber).remove();
+    firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/Question No: '+this.question.QuesNo+'/'+this.StudentNumber).remove();
   }
 
 
@@ -109,7 +109,7 @@ this.loaduserdetails();
 SendAns()
 {
 
-  firebase.database().ref('Answers/Tutorial:'+this.data.Tutno+"/Question No: "+this.data.QuesNo+"/"+this.StudentNumber).set({
+  firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+"/Question No: "+this.question.QuesNo+"/"+this.StudentNumber).set({
    Ans: this.myStuff,
    StudentNumber: this.StudentNumber
   });

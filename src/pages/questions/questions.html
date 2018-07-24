@@ -28,6 +28,7 @@
 
 <ion-content padding>
 
+
   <h1 id="home-heading1" style="color:#000000;">
     Unresolved Issues
   </h1>
@@ -42,8 +43,8 @@
 <ion-card (click)="showQuestion(i)">
 
       <ion-item>
-      <h2>Tutorial: {{item.Tutno}}</h2>
-      <p>Question: {{item.QuesNo}}</p>
+      <div><ion-icon name="paw" > Tutorial: {{item.Tutno}} </ion-icon></div>
+      <ion-icon name="finger-print" > Question: {{item.QuesNo}} </ion-icon>
 
 
     <ion-thumbnail item-left>

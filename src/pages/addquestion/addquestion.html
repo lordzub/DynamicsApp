@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Add Question</ion-title>
+    <ion-title>Add New</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,24 +18,25 @@
 
 
 
-<div style="display:flex; flex-direction:column;justify-content:center">
+<div style="display:flex; flex-direction:column;justify-content:center;color:#000000;">
   <ion-item>
-    <ion-label>Tutorial Number</ion-label>
+    <ion-label floating>Tutorial Number:</ion-label>
     <ion-input type="Number"  [(ngModel)]="TutNo"></ion-input>
   </ion-item>
 
+
   <ion-item>
-    <ion-label>Question Number</ion-label>
+    <ion-label floating>Question Number:</ion-label>
     <ion-input type="number"  [(ngModel)]="QuesNo"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating> I need...</ion-label>
+    <ion-label floating> I need... (please explain in full)</ion-label>
    <ion-textarea  [(ngModel)]="Description"></ion-textarea>
  </ion-item>
     </div>
 
-    <h2 id="home-heading1" style="color:#000000;">
+    <h2 id="home-heading1" style="display:flex; flex-direction:column;justify-content:center;color:#000000;">
     Question Photo
     </h2>
 
@@ -45,34 +46,21 @@
    </div>
 
 
+   <h2 id="home-heading1" style="color:#000000;">
+   Working Photo
+   </h2>
+
+   <div style="display:flex; flex-direction:column;justify-content:center">
+     <button ion-button (click)="presentWorkingActionSheet()" block>Add Working Photo</button>
 
 <div style="display:flex; flex-direction:column;justify-content:center">
      <img [src]="WorkDataUrl1" *ngIf="WorkDataUrl1"/>
 </div>
-<div style="display:flex; flex-direction:column;justify-content:center">
-  <img [src]="WorkDataUrl2" *ngIf="WorkDataUrl2"/>
-</div>
 
-<div style="display:flex; flex-direction:column;justify-content:center">
-<img [src]="WorkDataUrl3" *ngIf="WorkDataUrl3"/>
-</div>
-<div style="display:flex; flex-direction:column;justify-content:center">
-  <img [src]="WorkDataUrl4" *ngIf="WorkDataUrl4"/>
-</div>
-<div style="display:flex; flex-direction:column;justify-content:center">
-     <img [src]="WorkDataUrl5" *ngIf="WorkDataUrl5"/>
-</div>
 
-<h2 id="home-heading1" style="color:#000000;">
-Working Photo
-</h2>
-
-</ion-list>
-<div style="display:flex; flex-direction:column;justify-content:center">
-  <button ion-button (click)="presentWorkingActionSheet()" block>Add Working Photo</button>
 
   <button ion-button block  (click)="postQuestion()">Post Question</button>
 </div>
-
+</ion-list>
 
 </ion-content>

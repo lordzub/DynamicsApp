@@ -20,6 +20,7 @@ export class ShowQuesPage {
   @ViewChild('myInput') myInput: ElementRef;
 public Data: Array<any> = [];
 public question:any;
+recommendation_document: string;
 public myStuff:string;
 public Ans:any;
 public AnsStudent:any;
@@ -97,7 +98,14 @@ this.loaduserdetails();
       this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
   }
 
+  sendFeedback(){
+    firebase.database().ref('recommendation_document').push({
 
+     Ans: this.recommendation_document,
+     StudentNumber: this.StudentNumber
+    });
+    this.recommendation_document ='';
+  }
 
   deleteQuestion()
   {
@@ -109,7 +117,7 @@ this.loaduserdetails();
 SendAns()
 {
 
-  firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+"/Question No: "+this.question.QuesNo+"/"+this.StudentNumber).set({
+  firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+"/Question No: "+this.question.QuesNo+"/"+this.StudentNumber).push({
    Ans: this.myStuff,
    StudentNumber: this.StudentNumber
   });

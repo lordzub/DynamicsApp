@@ -10,6 +10,15 @@
     <ion-title>Add New</ion-title>
   </ion-navbar>
 
+  <form id="home-form6">
+    <ion-item id="home-input8">
+
+    <ion-input type="text" placeholder="Help us help you: add feedback!" [(ngModel)]="recommendation_adding" name="first"></ion-input>
+
+    <button ion-button item-right  (click)="sendFeedback()"> <ion-icon name="paper-plane"> </ion-icon> </button>
+    </ion-item>
+  </form>
+
 </ion-header>
 
 
@@ -57,7 +66,46 @@
      <img [src]="WorkDataUrl1" *ngIf="WorkDataUrl1"/>
 </div>
 
-
+<form>
+<ion-item id="editDocument-select2">
+    <ion-label>
+      Type of help
+    </ion-label>
+    <ion-select name="">
+      <ion-option>
+        Conceptual Issue
+      </ion-option>
+      <ion-option>
+          Finding my mistake
+        </ion-option>
+        <ion-option>
+          Other
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item id="editDocument-select3">
+    <ion-label>
+      Who to notify
+    </ion-label>
+    <ion-select name="">
+      <ion-option>
+        Only Bruce Kloot
+      </ion-option>
+      <ion-option>
+        Only Tutors
+      </ion-option>
+      <ion-option>
+        All
+      </ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item id="editDocument-toggle4">
+    <ion-label>
+      Post as anonymous
+    </ion-label>
+    <ion-toggle color="positive" checked="false"></ion-toggle>
+  </ion-item>
+</form>
 
   <button ion-button block  (click)="postQuestion()">Post Question</button>
 </div>

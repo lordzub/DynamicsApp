@@ -5,4 +5,31 @@ page-show-ques {
       border-radius: 0;
       background: transparent;
   }
+
+  .background{
+    background-image: url('../assets/imgs/backgroundleaves.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    img{
+      height: 40vh;
+      width: 50vw;
+      margin: auto;
+      display: block;
+      border-radius: 8px;
+    }
+    
+    .home .scroll-content {
+      display: table !important;
+      width: 100% !important;
+      height: 100% !important;
+      margin-top: -50px; /* the height of the centered content */
+      text-align: center;
+    }
+    .home .scroll {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
 }

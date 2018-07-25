@@ -18,7 +18,9 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class ShowQuesPage {
   @ViewChild('myInput') myInput: ElementRef;
-public Data: Array<any> = [];
+public Anss: Array<any> = [];
+public NoOfA: Array<any> = [];
+public UID: Array<any> = [];
 public question:any;
 recommendation_document: string;
 public myStuff:string;
@@ -39,7 +41,9 @@ console.log(this.question);
 
 var itemRef = firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/');
     itemRef.on('value', itemSnapshot => {
-      this.Data = [];
+      this.Anss = [];
+      this.NoOfA =[];
+      this.UID = [];
 
       itemSnapshot.forEach( itemSnap => {
       //  var key = itemSnap.key;
@@ -52,10 +56,44 @@ var itemRef = firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/
        Snapshot.forEach( Snap => {
          var key1 = Snap.key;
          //this.QuesNo.push(key1);
-         console.log(key1);
 
-         this.Data.push(Snap.val());
-        console.log(this.Data);
+
+
+
+
+         var QuestionRef = firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/Question No: '+this.question.QuesNo+'/'+key1);
+         QuestionRef.on('value', Snapshot =>
+       {
+
+
+        Snapshot.forEach( Snap => {
+          var key2 = Snap.key;
+          this.UID.push(key2);
+          console.log(key2);
+
+
+          var QuestionRef = firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/Question No: '+this.question.QuesNo+'/'+key1+'/'+key2);
+          QuestionRef.on('value', Snapshot =>
+        {
+
+
+
+
+           this.Anss.push(Snapshot.val().Ans);
+            this.NoOfA.push(Snapshot.val().StudentNumber);
+            console.log(this.NoOfA);
+          console.log(this.Anss);
+
+
+
+        });
+
+
+
+
+       });
+       });
+
       });
       });
         return false;
@@ -107,9 +145,9 @@ this.loaduserdetails();
     this.recommendation_document ='';
   }
 
-  deleteQuestion()
+  deleteQuestion(i)
   {
-    firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/Question No: '+this.question.QuesNo+'/'+this.StudentNumber).remove();
+    firebase.database().ref('Answers/Tutorial:'+this.question.Tutno+'/Question No: '+this.question.QuesNo+'/'+this.StudentNumber+'/'+this.UID[i]).remove();
   }
 
 

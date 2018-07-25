@@ -46,21 +46,19 @@
 
 
 
-  <ion-card *ngFor = 'let Ans of Data '>
-
-
+  <ion-card *ngFor = 'let Ans of Anss ; let i = index' [attr.data-index]="i">
   <ion-card-content>
   <ion-note>
-    {{Ans.StudentNumber}}
+  {{NoOfA[i]}}
   </ion-note>
 
   <h2>
-    {{Ans.Ans}}
+    {{Anss[i]}}
   </h2>
 </ion-card-content>
 
 
-  <button ion-button *ngIf ='Ans.StudentNumber == this.StudentNumber' color="danger" (click)="deleteQuestion()" >
+  <button ion-button *ngIf ='NoOfA[i]== this.StudentNumber' color="danger" (click)="deleteQuestion(i)" >
   <ion-icon name="backspace" icon-end>  Delete</ion-icon>
  </button>
 

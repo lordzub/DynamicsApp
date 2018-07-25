@@ -20,6 +20,7 @@ import { FilePath } from '@ionic-native/file-path';
 
 import { Camera } from '@ionic-native/camera';
 
+
 import { Base64 } from '@ionic-native/base64';
 
 import {ShowQuesPage} from '../pages/show-ques/show-ques';
@@ -32,6 +33,7 @@ import { SignupPage } from '../pages/signup/signup';
 
 
 import { CameraProvider } from '../providers/camera/camera';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 @NgModule({
@@ -71,7 +73,8 @@ import { CameraProvider } from '../providers/camera/camera';
     FileChooser,
     Camera,
     CameraProvider,
-    Base64
+    Base64,
+    LocalNotifications
   ]
 })
 export class AppModule {}

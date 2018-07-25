@@ -9,6 +9,7 @@ import firebase from 'firebase';
 import { File } from '@ionic-native/file';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { UserProvider } from '../../providers/user/user';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 /**
@@ -34,6 +35,7 @@ export class AddquestionPage {
 
   TutNo: number;
   QuesNo: number;
+  recommendation_adding: string;
   Description: String;
 
 
@@ -45,7 +47,8 @@ public WorkingDataUrl: string;
 
 
   constructor(public actionSheetCtrl: ActionSheetController, private camera:Camera,public imgservice: ImghandlerProvider,
-     public loadingCtrl: LoadingController,public zone: NgZone, public filechooser: FileChooser,public navCtrl: NavController,   public userservice: UserProvider) {
+     public loadingCtrl: LoadingController,public zone: NgZone, public filechooser: FileChooser,public navCtrl: NavController,
+      public userservice: UserProvider, private localNotifications: LocalNotifications) {
        var QuesUrl;
        this.WorkDataUrl = " ";
            this.WorkDataUrl1  =" ";
@@ -304,9 +307,18 @@ console.log(this.x);
     };
 
 
+
 postQuestion()
 {
 
+  this.localNotifications.schedule({
+    id: 1,
+    title: 'New Query!',
+    text: 'By User X',
+    //sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
+    //data: { secret: key }
+  });
+  
   firebase.database().ref('Questions/Tutorial:'+this.TutNo+"/Question No: "+this.QuesNo+"/").set({
    Tutno: this.TutNo,
    QuesNo: this.QuesNo,
@@ -321,7 +333,10 @@ postQuestion()
   });
 
 this.navCtrl.pop();
+
+
 }
+
 
 
 
@@ -397,6 +412,15 @@ this.navCtrl.pop();
             ]
           });
           actionSheet.present();
+        }
+
+        sendFeedback(){
+          firebase.database().ref('recommendation_adding').push({
+
+           Ans: this.recommendation_adding,
+           StudentNumber: this.StudentNumber
+          });
+          this.recommendation_adding ='';
         }
 
 }
